@@ -83,6 +83,11 @@ def moveVertical(dy)
 end
 
 def update_game
+  handle_inputs
+  update_tiles
+end
+
+def handle_inputs
   while @inputs.length > 0
     current = @inputs.pop
     if current == INPUT[:LEFT]
@@ -95,7 +100,9 @@ def update_game
       moveVertical(1)
     end
   end
+end
 
+def update_tiles
   for y in (0...@map.length).to_a.reverse
     for x in 0...@map[y].length
       if ((@map[y][x] == TILE[:STONE] || @map[y][x] == TILE[:FALLING_STONE]) &&
@@ -116,35 +123,53 @@ def update_game
 end
 
 def draw
+  g = set_up_graphics
+
+  draw_map(g)
+  draw_player(g)
+end
+
+def set_up_graphics
   canvas = @document.getElementById("GameCanvas")
   g = canvas.getContext("2d")
 
   g.clearRect(0, 0, canvas.width, canvas.height)
+  g
+end
 
-  # Draw map
+def draw_map(g)
   for y in 0...@map.length
     for x in 0...@map[y].length
-      if @map[y][x] == TILE[:FLUX]
-        g.fillStyle = "#ccffcc"
-      elsif @map[y][x] == TILE[:UNBREAKABLE]
-        g.fillStyle = "#999999"
-      elsif @map[y][x] == TILE[:STONE] || @map[y][x] == TILE[:FALLING_STONE]
-        g.fillStyle = "#0000cc"
-      elsif @map[y][x] == TILE[:BOX] || @map[y][x] == TILE[:FALLING_BOX]
-        g.fillStyle = "#8b4513"
-      elsif @map[y][x] == TILE[:KEY1] || @map[y][x] == TILE[:LOCK1]
-        g.fillStyle = "#ffcc00"
-      elsif @map[y][x] == TILE[:KEY2] || @map[y][x] == TILE[:LOCK2]
-        g.fillStyle = "#00ccff"
-      end
-
-      if @map[y][x] != TILE[:AIR] && @map[y][x] != TILE[:PLAYER]
-        g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
-      end
+      set_tile_color(g, x, y)
+      draw_tile(g, x, y)
     end
   end
+end
 
-  # Draw player
+def set_tile_color(g, x, y)
+  if @map[y][x] == TILE[:FLUX]
+    g.fillStyle = "#ccffcc"
+  elsif @map[y][x] == TILE[:UNBREAKABLE]
+    g.fillStyle = "#999999"
+  elsif @map[y][x] == TILE[:STONE] || @map[y][x] == TILE[:FALLING_STONE]
+    g.fillStyle = "#0000cc"
+  elsif @map[y][x] == TILE[:BOX] || @map[y][x] == TILE[:FALLING_BOX]
+    g.fillStyle = "#8b4513"
+  elsif @map[y][x] == TILE[:KEY1] || @map[y][x] == TILE[:LOCK1]
+    g.fillStyle = "#ffcc00"
+  elsif @map[y][x] == TILE[:KEY2] || @map[y][x] == TILE[:LOCK2]
+    g.fillStyle = "#00ccff"
+  end
+end
+
+def draw_tile(g, x, y)
+  if @map[y][x] != TILE[:AIR] && @map[y][x] != TILE[:PLAYER]
+    g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
+  end
+end
+
+
+def draw_player(g)
   g.fillStyle = "#ff0000"
   g.fillRect(@playerx * TILE_SIZE, @playery * TILE_SIZE, TILE_SIZE, TILE_SIZE)
 end
