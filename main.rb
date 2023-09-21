@@ -15,9 +15,74 @@ TILE = {
   KEY2: 10, LOCK2: 11
 }
 
-INPUT = {
-  UP: 0, DOWN: 1, LEFT: 2, RIGHT: 3
-}
+class Up
+  def is_up?
+    true
+  end
+
+  def is_down?
+    false
+    end
+
+  def is_left?
+    false
+  end
+
+  def is_right?
+    false
+  end
+end
+class Down
+  def is_up?
+    false
+  end
+
+  def is_down?
+    true
+    end
+
+  def is_left?
+    false
+  end
+
+  def is_right?
+    false
+  end
+end
+class Left
+  def is_up?
+    false
+  end
+
+  def is_down?
+    false
+    end
+
+  def is_left?
+    true
+  end
+
+  def is_right?
+    false
+  end
+end
+class Right
+  def is_up?
+    false
+  end
+
+  def is_down?
+    false
+    end
+
+  def is_left?
+    false
+  end
+
+  def is_right?
+    true
+  end
+end
 
 @playerx = 1
 @playery = 1
@@ -90,13 +155,13 @@ end
 def handle_inputs
   while @inputs.length > 0
     current = @inputs.pop
-    if current == INPUT[:LEFT]
+    if current.is_left?
       moveHorizontal(-1)
-    elsif current == INPUT[:RIGHT]
+    elsif current.is_right?
       moveHorizontal(1)
-    elsif current == INPUT[:UP]
+    elsif current.is_up?
       moveVertical(-1)
-    elsif current == INPUT[:DOWN]
+    elsif current.is_down?
       moveVertical(1)
     end
   end
@@ -191,13 +256,13 @@ DOWN_KEY = "down"
 
 on :key_down do |e|
   if e.key == LEFT_KEY || e.key == "a"
-    @inputs.push(INPUT[:LEFT])
+    @inputs.push(Left.new)
   elsif e.key == UP_KEY || e.key == "w"
-    @inputs.push(INPUT[:UP])
+    @inputs.push(Up.new)
   elsif e.key == RIGHT_KEY || e.key == "d"
-    @inputs.push(INPUT[:RIGHT])
+    @inputs.push(Right.new)
   elsif e.key == DOWN_KEY || e.key == "s"
-    @inputs.push(INPUT[:DOWN])
+    @inputs.push(Down.new)
   elsif e.key == "escape"
     close
   end
@@ -242,5 +307,8 @@ def @document.getElementById(id)
   canvas
 end
 
-# ruby2d call to make it all work
-show
+
+if __FILE__ == $PROGRAM_NAME
+  # ruby2d call to make it all work
+  show
+end
