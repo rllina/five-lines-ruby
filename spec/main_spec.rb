@@ -1,10 +1,6 @@
 require_relative '../main'
 
 RSpec.shared_examples "an input object" do
-  it { is_expected.to respond_to(:is_up?) }
-  it { is_expected.to respond_to(:is_down?) }
-  it { is_expected.to respond_to(:is_left?) }
-  it { is_expected.to respond_to(:is_right?) }
   it { is_expected.to respond_to(:handle_input) }
 end
 

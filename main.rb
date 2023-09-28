@@ -16,85 +16,21 @@ TILE = {
 }
 
 class Up
-  def is_up?
-    true
-  end
-
-  def is_down?
-    false
-    end
-
-  def is_left?
-    false
-  end
-
-  def is_right?
-    false
-  end
-
   def handle_input
     moveVertical(-1)
   end
 end
 class Down
-  def is_up?
-    false
-  end
-
-  def is_down?
-    true
-    end
-
-  def is_left?
-    false
-  end
-
-  def is_right?
-    false
-  end
-
   def handle_input
     moveVertical(1)
   end
 end
 class Left
-  def is_up?
-    false
-  end
-
-  def is_down?
-    false
-    end
-
-  def is_left?
-    true
-  end
-
-  def is_right?
-    false
-  end
-
   def handle_input
     moveHorizontal(-1)
   end
 end
 class Right
-  def is_up?
-    false
-  end
-
-  def is_down?
-    false
-    end
-
-  def is_left?
-    false
-  end
-
-  def is_right?
-    true
-  end
-
   def handle_input
     moveHorizontal(1)
   end
