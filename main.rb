@@ -4,35 +4,627 @@ TILE_SIZE = 30
 FPS = 30
 SLEEP = 1000 / FPS
 
-TILE = {
-  AIR: 0,
-  FLUX: 1,
-  UNBREAKABLE: 2,
-  PLAYER: 3,
-  STONE: 4, FALLING_STONE: 5,
-  BOX: 6, FALLING_BOX: 7,
-  KEY1: 8, LOCK1: 9,
-  KEY2: 10, LOCK2: 11
-}
-
 class Up
   def handle_input
     moveVertical(-1)
   end
 end
+
 class Down
   def handle_input
     moveVertical(1)
   end
 end
+
 class Left
   def handle_input
     moveHorizontal(-1)
   end
 end
+
 class Right
   def handle_input
     moveHorizontal(1)
+  end
+end
+
+class Air
+  def is_air?
+    true
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Flux
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    true
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Unbreakable
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    true
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Player
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    true
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Stone
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    true
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class FallingStone
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    true
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Box
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    true
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class FallingBox
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    true
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Key1
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    true
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Lock1
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    true
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Key2
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    true
+  end
+
+  def is_lock2?
+    false
+  end
+end
+
+class Lock2
+  def is_air?
+    false
+  end
+
+  def is_flux?
+    false
+  end
+
+  def is_unbreakable?
+    false
+  end
+
+  def is_player?
+    false
+  end
+
+  def is_stone?
+    false
+  end
+
+  def is_falling_stone?
+    false
+  end
+
+  def is_box?
+    false
+  end
+
+  def is_falling_box?
+    false
+  end
+
+  def is_key1?
+    false
+  end
+
+  def is_lock1?
+    false
+  end
+
+  def is_key2?
+    false
+  end
+
+  def is_lock2?
+    true
   end
 end
 
@@ -48,53 +640,87 @@ $map = [
   [2, 2, 2, 2, 2, 2, 2, 2],
 ]
 
+
+$tile_map = $map.map do |row|
+  row.map do |tile_integer|
+    case tile_integer
+    when 0
+      Air.new
+    when 1
+      Flux.new
+    when 2
+      Unbreakable.new
+    when 3
+      Player.new
+    when 4
+      Stone.new
+    when 5
+      FallingStone.new
+    when 6
+      Box.new
+    when 7
+      FallingBox.new
+    when 8
+      Key1.new
+    when 9
+      Lock1.new
+    when 10
+      Key2.new
+    when 11
+      Lock2.new
+    else
+      raise "Unknown tile type: #{tile_integer}"
+    end
+  end
+end
+
 @inputs = []
 
 def remove(tile)
-  for y in 0...$map.length
-    for x in 0...$map[y].length
-      if $map[y][x] == tile
-        $map[y][x] = TILE[:AIR]
+  for y in 0...$tile_map.length
+    for x in 0...$tile_map[y].length
+      if $tile_map[y][x].instance_of?(tile.class)
+        $tile_map[y][x] = Air.new
       end
     end
   end
 end
 
 def moveToTile(newx, newy)
-  $map[$playery][$playerx] = TILE[:AIR]
-  $map[newy][newx] = TILE[:PLAYER]
+  $tile_map[$playery][$playerx] = Air.new
+  $tile_map[newy][newx] = Player.new
   $playerx = newx
   $playery = newy
 end
 
 def moveHorizontal(dx)
-  if ($map[$playery][$playerx + dx] == TILE[:FLUX] ||
-    $map[$playery][$playerx + dx] == TILE[:AIR])
+  if ($tile_map[$playery][$playerx + dx].is_flux? ||
+    $tile_map[$playery][$playerx + dx].is_air?)
     moveToTile($playerx + dx, $playery)
-  elsif (($map[$playery][$playerx + dx] == TILE[:STONE] ||
-    $map[$playery][$playerx + dx] == TILE[:BOX]) &&
-    $map[$playery][$playerx + dx + dx] == TILE[:AIR] &&
-    $map[$playery + 1][$playerx + dx] != TILE[:AIR])
-    $map[$playery][$playerx + dx + dx] = $map[$playery][$playerx + dx]
+  elsif (($tile_map[$playery][$playerx + dx].is_stone? ||
+    $tile_map[$playery][$playerx + dx].is_box?) &&
+    $tile_map[$playery][$playerx + dx + dx].is_air? &&
+    !$tile_map[$playery + 1][$playerx + dx].is_air?)
+    $tile_map[$playery][$playerx + dx + dx] = $tile_map[$playery][$playerx + dx]
     moveToTile($playerx + dx, $playery)
-  elsif ($map[$playery][$playerx + dx] == TILE[:KEY1])
-    remove(TILE[:LOCK1])
+  elsif ($tile_map[$playery][$playerx + dx].is_key1?)
+    remove(Lock1.new)
     moveToTile($playerx + dx, $playery)
-  elsif ($map[$playery][$playerx + dx] == TILE[:KEY2])
-    remove(TILE[:LOCK2])
+  elsif ($tile_map[$playery][$playerx + dx].is_key2?)
+    remove(Lock2.new)
     moveToTile($playerx + dx, $playery)
   end
 end
 
 def moveVertical(dy)
-  if ($map[$playery + dy][$playerx] == TILE[:FLUX] ||
-    $map[$playery + dy][$playerx] == TILE[:AIR])
+  if ($tile_map[$playery + dy][$playerx].is_flux? ||
+    $tile_map[$playery + dy][$playerx].is_air?)
     moveToTile($playerx, $playery + dy)
-  elsif $map[$playery + dy][$playerx] == TILE[:KEY1]
-    remove(TILE[:LOCK1])
+  elsif $tile_map[$playery + dy][$playerx].is_key1?
+    remove(Lock1.new)
     moveToTile($playerx, $playery + dy)
-  elsif $map[$playery + dy][$playerx] == TILE[:KEY2]
-    remove(TILE[:LOCK2])
+  elsif $tile_map[$playery + dy][$playerx].is_key2?
+    remove(Lock2.new)
     moveToTile($playerx, $playery + dy)
   end
 end
@@ -112,20 +738,20 @@ def handle_inputs
 end
 
 def update_tiles
-  for y in (0...$map.length).to_a.reverse
-    for x in 0...$map[y].length
-      if (($map[y][x] == TILE[:STONE] || $map[y][x] == TILE[:FALLING_STONE]) &&
-        $map[y + 1][x] == TILE[:AIR])
-        $map[y + 1][x] = TILE[:FALLING_STONE]
-        $map[y][x] = TILE[:AIR]
-      elsif (($map[y][x] == TILE[:BOX] || $map[y][x] == TILE[:FALLING_BOX]) &&
-        $map[y + 1][x] == TILE[:AIR])
-        $map[y + 1][x] = TILE[:FALLING_BOX]
-        $map[y][x] = TILE[:AIR]
-      elsif $map[y][x] == TILE[:FALLING_STONE]
-        $map[y][x] = TILE[:STONE]
-      elsif $map[y][x] == TILE[:FALLING_BOX]
-        $map[y][x] = TILE[:BOX]
+  for y in (0...$tile_map.length).to_a.reverse
+    for x in 0...$tile_map[y].length
+      if (($tile_map[y][x].is_stone? || $tile_map[y][x].is_falling_stone?) &&
+        $tile_map[y + 1][x].is_air?)
+        $tile_map[y + 1][x] = FallingStone.new
+        $tile_map[y][x] = Air.new
+      elsif (($tile_map[y][x].is_box? || $tile_map[y][x].is_falling_box?) &&
+        $tile_map[y + 1][x].is_air?)
+        $tile_map[y + 1][x] = FallingBox.new
+        $tile_map[y][x] = Air.new
+      elsif $tile_map[y][x].is_falling_stone?
+        $tile_map[y][x] = Stone.new
+      elsif $tile_map[y][x].is_falling_box?
+        $tile_map[y][x] = Box.new
       end
     end
   end
@@ -147,8 +773,8 @@ def set_up_graphics
 end
 
 def draw_map(g)
-  for y in 0...$map.length
-    for x in 0...$map[y].length
+  for y in 0...$tile_map.length
+    for x in 0...$tile_map[y].length
       set_tile_color(g, x, y)
       draw_tile(g, x, y)
     end
@@ -156,27 +782,26 @@ def draw_map(g)
 end
 
 def set_tile_color(g, x, y)
-  if $map[y][x] == TILE[:FLUX]
+  if $tile_map[y][x].is_flux?
     g.fillStyle = "#ccffcc"
-  elsif $map[y][x] == TILE[:UNBREAKABLE]
+  elsif $tile_map[y][x].is_unbreakable?
     g.fillStyle = "#999999"
-  elsif $map[y][x] == TILE[:STONE] || $map[y][x] == TILE[:FALLING_STONE]
+  elsif $tile_map[y][x].is_stone? || $tile_map[y][x].is_falling_stone?
     g.fillStyle = "#0000cc"
-  elsif $map[y][x] == TILE[:BOX] || $map[y][x] == TILE[:FALLING_BOX]
+  elsif $tile_map[y][x].is_box? || $tile_map[y][x].is_falling_box?
     g.fillStyle = "#8b4513"
-  elsif $map[y][x] == TILE[:KEY1] || $map[y][x] == TILE[:LOCK1]
+  elsif $tile_map[y][x].is_key1? || $tile_map[y][x].is_lock1?
     g.fillStyle = "#ffcc00"
-  elsif $map[y][x] == TILE[:KEY2] || $map[y][x] == TILE[:LOCK2]
+  elsif $tile_map[y][x].is_key2? || $tile_map[y][x].is_lock2?
     g.fillStyle = "#00ccff"
   end
 end
 
 def draw_tile(g, x, y)
-  if $map[y][x] != TILE[:AIR] && $map[y][x] != TILE[:PLAYER]
+  if !$tile_map[y][x].is_air? && !$tile_map[y][x].is_player?
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
   end
 end
-
 
 def draw_player(g)
   g.fillStyle = "#ff0000"
@@ -250,7 +875,6 @@ def @document.getElementById(id)
 
   canvas
 end
-
 
 if __FILE__ == $PROGRAM_NAME
   # ruby2d call to make it all work
