@@ -31,6 +31,10 @@ class Up
   def is_right?
     false
   end
+
+  def handle_input
+    moveVertical(-1)
+  end
 end
 class Down
   def is_up?
@@ -47,6 +51,10 @@ class Down
 
   def is_right?
     false
+  end
+
+  def handle_input
+    moveVertical(1)
   end
 end
 class Left
@@ -65,6 +73,10 @@ class Left
   def is_right?
     false
   end
+
+  def handle_input
+    moveHorizontal(-1)
+  end
 end
 class Right
   def is_up?
@@ -81,6 +93,10 @@ class Right
 
   def is_right?
     true
+  end
+
+  def handle_input
+    moveHorizontal(1)
   end
 end
 
@@ -155,15 +171,7 @@ end
 def handle_inputs
   while @inputs.length > 0
     current = @inputs.pop
-    if current.is_left?
-      moveHorizontal(-1)
-    elsif current.is_right?
-      moveHorizontal(1)
-    elsif current.is_up?
-      moveVertical(-1)
-    elsif current.is_down?
-      moveVertical(1)
-    end
+    current.handle_input
   end
 end
 
