@@ -100,10 +100,10 @@ class Right
   end
 end
 
-@playerx = 1
-@playery = 1
+$playerx = 1
+$playery = 1
 
-@map = [
+$map = [
   [2, 2, 2, 2, 2, 2, 2, 2],
   [2, 3, 0, 1, 1, 2, 0, 2],
   [2, 4, 2, 6, 1, 2, 0, 2],
@@ -115,51 +115,51 @@ end
 @inputs = []
 
 def remove(tile)
-  for y in 0...@map.length
-    for x in 0...@map[y].length
-      if @map[y][x] == tile
-        @map[y][x] = TILE[:AIR]
+  for y in 0...$map.length
+    for x in 0...$map[y].length
+      if $map[y][x] == tile
+        $map[y][x] = TILE[:AIR]
       end
     end
   end
 end
 
 def moveToTile(newx, newy)
-  @map[@playery][@playerx] = TILE[:AIR]
-  @map[newy][newx] = TILE[:PLAYER]
-  @playerx = newx
-  @playery = newy
+  $map[$playery][$playerx] = TILE[:AIR]
+  $map[newy][newx] = TILE[:PLAYER]
+  $playerx = newx
+  $playery = newy
 end
 
 def moveHorizontal(dx)
-  if (@map[@playery][@playerx + dx] == TILE[:FLUX] ||
-    @map[@playery][@playerx + dx] == TILE[:AIR])
-    moveToTile(@playerx + dx, @playery)
-  elsif ((@map[@playery][@playerx + dx] == TILE[:STONE] ||
-    @map[@playery][@playerx + dx] == TILE[:BOX]) &&
-    @map[@playery][@playerx + dx + dx] == TILE[:AIR] &&
-    @map[@playery + 1][@playerx + dx] != TILE[:AIR])
-    @map[@playery][@playerx + dx + dx] = @map[@playery][@playerx + dx]
-    moveToTile(@playerx + dx, @playery)
-  elsif (@map[@playery][@playerx + dx] == TILE[:KEY1])
+  if ($map[$playery][$playerx + dx] == TILE[:FLUX] ||
+    $map[$playery][$playerx + dx] == TILE[:AIR])
+    moveToTile($playerx + dx, $playery)
+  elsif (($map[$playery][$playerx + dx] == TILE[:STONE] ||
+    $map[$playery][$playerx + dx] == TILE[:BOX]) &&
+    $map[$playery][$playerx + dx + dx] == TILE[:AIR] &&
+    $map[$playery + 1][$playerx + dx] != TILE[:AIR])
+    $map[$playery][$playerx + dx + dx] = $map[$playery][$playerx + dx]
+    moveToTile($playerx + dx, $playery)
+  elsif ($map[$playery][$playerx + dx] == TILE[:KEY1])
     remove(TILE[:LOCK1])
-    moveToTile(@playerx + dx, @playery)
-  elsif (@map[@playery][@playerx + dx] == TILE[:KEY2])
+    moveToTile($playerx + dx, $playery)
+  elsif ($map[$playery][$playerx + dx] == TILE[:KEY2])
     remove(TILE[:LOCK2])
-    moveToTile(@playerx + dx, @playery)
+    moveToTile($playerx + dx, $playery)
   end
 end
 
 def moveVertical(dy)
-  if (@map[@playery + dy][@playerx] == TILE[:FLUX] ||
-    @map[@playery + dy][@playerx] == TILE[:AIR])
-    moveToTile(@playerx, @playery + dy)
-  elsif @map[@playery + dy][@playerx] == TILE[:KEY1]
+  if ($map[$playery + dy][$playerx] == TILE[:FLUX] ||
+    $map[$playery + dy][$playerx] == TILE[:AIR])
+    moveToTile($playerx, $playery + dy)
+  elsif $map[$playery + dy][$playerx] == TILE[:KEY1]
     remove(TILE[:LOCK1])
-    moveToTile(@playerx, @playery + dy)
-  elsif @map[@playery + dy][@playerx] == TILE[:KEY2]
+    moveToTile($playerx, $playery + dy)
+  elsif $map[$playery + dy][$playerx] == TILE[:KEY2]
     remove(TILE[:LOCK2])
-    moveToTile(@playerx, @playery + dy)
+    moveToTile($playerx, $playery + dy)
   end
 end
 
@@ -176,20 +176,20 @@ def handle_inputs
 end
 
 def update_tiles
-  for y in (0...@map.length).to_a.reverse
-    for x in 0...@map[y].length
-      if ((@map[y][x] == TILE[:STONE] || @map[y][x] == TILE[:FALLING_STONE]) &&
-        @map[y + 1][x] == TILE[:AIR])
-        @map[y + 1][x] = TILE[:FALLING_STONE]
-        @map[y][x] = TILE[:AIR]
-      elsif ((@map[y][x] == TILE[:BOX] || @map[y][x] == TILE[:FALLING_BOX]) &&
-        @map[y + 1][x] == TILE[:AIR])
-        @map[y + 1][x] = TILE[:FALLING_BOX]
-        @map[y][x] = TILE[:AIR]
-      elsif @map[y][x] == TILE[:FALLING_STONE]
-        @map[y][x] = TILE[:STONE]
-      elsif @map[y][x] == TILE[:FALLING_BOX]
-        @map[y][x] = TILE[:BOX]
+  for y in (0...$map.length).to_a.reverse
+    for x in 0...$map[y].length
+      if (($map[y][x] == TILE[:STONE] || $map[y][x] == TILE[:FALLING_STONE]) &&
+        $map[y + 1][x] == TILE[:AIR])
+        $map[y + 1][x] = TILE[:FALLING_STONE]
+        $map[y][x] = TILE[:AIR]
+      elsif (($map[y][x] == TILE[:BOX] || $map[y][x] == TILE[:FALLING_BOX]) &&
+        $map[y + 1][x] == TILE[:AIR])
+        $map[y + 1][x] = TILE[:FALLING_BOX]
+        $map[y][x] = TILE[:AIR]
+      elsif $map[y][x] == TILE[:FALLING_STONE]
+        $map[y][x] = TILE[:STONE]
+      elsif $map[y][x] == TILE[:FALLING_BOX]
+        $map[y][x] = TILE[:BOX]
       end
     end
   end
@@ -211,8 +211,8 @@ def set_up_graphics
 end
 
 def draw_map(g)
-  for y in 0...@map.length
-    for x in 0...@map[y].length
+  for y in 0...$map.length
+    for x in 0...$map[y].length
       set_tile_color(g, x, y)
       draw_tile(g, x, y)
     end
@@ -220,23 +220,23 @@ def draw_map(g)
 end
 
 def set_tile_color(g, x, y)
-  if @map[y][x] == TILE[:FLUX]
+  if $map[y][x] == TILE[:FLUX]
     g.fillStyle = "#ccffcc"
-  elsif @map[y][x] == TILE[:UNBREAKABLE]
+  elsif $map[y][x] == TILE[:UNBREAKABLE]
     g.fillStyle = "#999999"
-  elsif @map[y][x] == TILE[:STONE] || @map[y][x] == TILE[:FALLING_STONE]
+  elsif $map[y][x] == TILE[:STONE] || $map[y][x] == TILE[:FALLING_STONE]
     g.fillStyle = "#0000cc"
-  elsif @map[y][x] == TILE[:BOX] || @map[y][x] == TILE[:FALLING_BOX]
+  elsif $map[y][x] == TILE[:BOX] || $map[y][x] == TILE[:FALLING_BOX]
     g.fillStyle = "#8b4513"
-  elsif @map[y][x] == TILE[:KEY1] || @map[y][x] == TILE[:LOCK1]
+  elsif $map[y][x] == TILE[:KEY1] || $map[y][x] == TILE[:LOCK1]
     g.fillStyle = "#ffcc00"
-  elsif @map[y][x] == TILE[:KEY2] || @map[y][x] == TILE[:LOCK2]
+  elsif $map[y][x] == TILE[:KEY2] || $map[y][x] == TILE[:LOCK2]
     g.fillStyle = "#00ccff"
   end
 end
 
 def draw_tile(g, x, y)
-  if @map[y][x] != TILE[:AIR] && @map[y][x] != TILE[:PLAYER]
+  if $map[y][x] != TILE[:AIR] && $map[y][x] != TILE[:PLAYER]
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
   end
 end
@@ -244,7 +244,7 @@ end
 
 def draw_player(g)
   g.fillStyle = "#ff0000"
-  g.fillRect(@playerx * TILE_SIZE, @playery * TILE_SIZE, TILE_SIZE, TILE_SIZE)
+  g.fillRect($playerx * TILE_SIZE, $playery * TILE_SIZE, TILE_SIZE, TILE_SIZE)
 end
 
 def gameLoop
