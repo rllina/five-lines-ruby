@@ -35,6 +35,8 @@ RSpec.shared_examples "a tile object" do
   it { is_expected.to respond_to(:is_lock1?) }
   it { is_expected.to respond_to(:is_key2?) }
   it { is_expected.to respond_to(:is_lock2?) }
+  it { is_expected.to respond_to(:is_passable?) }
+  it { is_expected.to respond_to(:is_blockable?) }
 end
 
 RSpec.describe "Tile shared examples" do

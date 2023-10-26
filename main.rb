@@ -76,6 +76,10 @@ class Air
   def is_lock2?
     false
   end
+
+  def is_passable?
+    true
+  end
 end
 
 class Flux
@@ -126,6 +130,10 @@ class Flux
   def is_lock2?
     false
   end
+
+  def is_passable?
+    true
+  end
 end
 
 class Unbreakable
@@ -174,6 +182,10 @@ class Unbreakable
   end
 
   def is_lock2?
+    false
+  end
+
+  def is_passable?
     false
   end
 end
@@ -226,6 +238,10 @@ class Player
   def is_lock2?
     false
   end
+
+  def is_passable?
+    false
+  end
 end
 
 class Stone
@@ -274,6 +290,10 @@ class Stone
   end
 
   def is_lock2?
+    false
+  end
+
+  def is_passable?
     false
   end
 end
@@ -326,6 +346,10 @@ class FallingStone
   def is_lock2?
     false
   end
+
+  def is_passable?
+    false
+  end
 end
 
 class Box
@@ -374,6 +398,10 @@ class Box
   end
 
   def is_lock2?
+    false
+  end
+
+  def is_passable?
     false
   end
 end
@@ -426,6 +454,10 @@ class FallingBox
   def is_lock2?
     false
   end
+
+  def is_passable?
+    false
+  end
 end
 
 class Key1
@@ -474,6 +506,10 @@ class Key1
   end
 
   def is_lock2?
+    false
+  end
+
+  def is_passable?
     false
   end
 end
@@ -526,6 +562,10 @@ class Lock1
   def is_lock2?
     false
   end
+
+  def is_passable?
+    false
+  end
 end
 
 class Key2
@@ -574,6 +614,10 @@ class Key2
   end
 
   def is_lock2?
+    false
+  end
+
+  def is_passable?
     false
   end
 end
@@ -626,6 +670,10 @@ class Lock2
   def is_lock2?
     true
   end
+
+  def is_passable?
+    false
+  end
 end
 
 $playerx = 1
@@ -639,7 +687,6 @@ $map = [
   [2, 4, 1, 1, 1, 9, 0, 2],
   [2, 2, 2, 2, 2, 2, 2, 2],
 ]
-
 
 $tile_map = $map.map do |row|
   row.map do |tile_integer|
@@ -694,8 +741,7 @@ def moveToTile(newx, newy)
 end
 
 def moveHorizontal(dx)
-  if ($tile_map[$playery][$playerx + dx].is_flux? ||
-    $tile_map[$playery][$playerx + dx].is_air?)
+  if ($tile_map[$playery][$playerx + dx].is_passable?)
     moveToTile($playerx + dx, $playery)
   elsif (($tile_map[$playery][$playerx + dx].is_stone? ||
     $tile_map[$playery][$playerx + dx].is_box?) &&
@@ -713,8 +759,7 @@ def moveHorizontal(dx)
 end
 
 def moveVertical(dy)
-  if ($tile_map[$playery + dy][$playerx].is_flux? ||
-    $tile_map[$playery + dy][$playerx].is_air?)
+  if ($tile_map[$playery + dy][$playerx].is_passable?)
     moveToTile($playerx, $playery + dy)
   elsif $tile_map[$playery + dy][$playerx].is_key1?
     remove(Lock1.new)
